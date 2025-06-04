@@ -42,7 +42,7 @@ python app.py
 
 ### 3. 访问系统
 
-打开浏览器访问：`http://localhost:5000`
+打开浏览器访问：`http://localhost:8080`
 
 ## 📊 使用说明
 
