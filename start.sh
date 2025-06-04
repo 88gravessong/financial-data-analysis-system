@@ -20,7 +20,7 @@ echo "📦 检查并安装依赖..."
 pip install -r requirements.txt
 
 # 检查必要文件
-required_files=("app.py" "analysis_multi.py" "index.html")
+required_files=("app.py" "analysis_multi.py" "analysis_malaysia.py" "index.html")
 for file in "${required_files[@]}"; do
     if [ ! -f "$file" ]; then
         echo "❌ 缺少必要文件: $file"

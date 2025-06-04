@@ -14,7 +14,8 @@
 
 ```
 ├── app.py              # Flask Web服务器
-├── analysis_multi.py   # 多文件分析引擎  
+├── analysis_multi.py   # 多文件分析引擎（印尼财务分析）
+├── analysis_malaysia.py # 占位的马来跨境财务分析模块
 ├── analysis.py         # 原始单文件分析脚本
 ├── index.html          # Web前端页面
 ├── requirements.txt    # 项目依赖
