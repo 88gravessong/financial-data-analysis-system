@@ -168,7 +168,7 @@ def process_financial_data(order_files: List[Union[str, Path]],
     # 订单级计数
     metrics = {
         "订单数": pair_df.groupby(sku_col)["order_id"].nunique(),
-        "出库订单数数量": pair_df[pair_df["_shipped"]=="yes"].groupby(sku_col)["order_id"].nunique(),
+        "出库订单数": pair_df[pair_df["_shipped"]=="yes"].groupby(sku_col)["order_id"].nunique(),
         "签收订单数": pair_df[pair_df["_status"].isin(["delivered","completed"])]\
                      .groupby(sku_col)["order_id"].nunique(),
         "取消订单数": pair_df[pair_df["_status"]=="cancelled"].groupby(sku_col)["order_id"].nunique(),
