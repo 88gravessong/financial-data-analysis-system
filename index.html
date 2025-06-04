@@ -134,6 +134,18 @@
             margin-top: 40px;
         }
 
+        .module-select {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .module-select select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
         .process-btn {
             background: linear-gradient(45deg, #2ed573, #1e90ff);
             color: white;
@@ -261,6 +273,13 @@
         </div>
 
         <div class="process-section">
+            <div class="module-select">
+                <label for="module-select">选择分析模块：</label>
+                <select id="module-select">
+                    <option value="indonesia">印尼财务分析</option>
+                    <option value="malaysia">马来跨境财务分析</option>
+                </select>
+            </div>
             <button class="process-btn" id="process-btn" onclick="processFiles()" disabled>
                 🚀 开始分析
             </button>
@@ -279,6 +298,11 @@
             settlements: [],
             consumption: null
         };
+
+        let selectedModule = 'indonesia';
+        document.getElementById('module-select').addEventListener('change', e => {
+            selectedModule = e.target.value;
+        });
 
         // 初始化拖拽功能
         document.querySelectorAll('.upload-box').forEach(box => {
@@ -419,6 +443,9 @@
                 
                 // 添加消耗文件
                 formData.append('consumption', fileStorage.consumption);
+
+                // 选择的分析模块
+                formData.append('module', selectedModule);
 
                 // 模拟进度更新
                 let progress_value = 0;

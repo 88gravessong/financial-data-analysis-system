@@ -13,7 +13,13 @@ from werkzeug.utils import secure_filename
 import pandas as pd
 
 # 导入修改后的分析模块
-from analysis_multi import process_financial_data
+from analysis_multi import process_financial_data as process_indonesia
+from analysis_malaysia import process_financial_data as process_malaysia
+
+ANALYSIS_FUNCTIONS = {
+    'indonesia': process_indonesia,
+    'malaysia': process_malaysia,
+}
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB
@@ -59,6 +65,8 @@ def process_files():
             if file.filename == '' or not allowed_file(file.filename):
                 return jsonify({'error': f'文件 {file.filename} 格式不正确，请上传Excel文件'}), 400
 
+        module = request.form.get('module', 'indonesia')
+
         # 创建临时目录
         with tempfile.TemporaryDirectory() as temp_dir:
             temp_path = Path(temp_dir)
@@ -86,7 +94,8 @@ def process_files():
 
             # 执行数据分析
             try:
-                output_path = process_financial_data(
+                analysis_func = ANALYSIS_FUNCTIONS.get(module, process_indonesia)
+                output_path = analysis_func(
                     order_files=order_paths,
                     settlement_files=settlement_paths,
                     consumption_file=consumption_path,
